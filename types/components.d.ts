@@ -14,11 +14,14 @@ declare module 'vue' {
     NaiveProvider: (typeof import('./../src/components/common/NaiveProvider.vue'))['default'];
     NAvatar: (typeof import('naive-ui'))['NAvatar'];
     NBackTop: (typeof import('naive-ui'))['NBackTop'];
+    NButto: (typeof import('naive-ui'))['NButto'];
     NButton: (typeof import('naive-ui'))['NButton'];
     NCard: (typeof import('naive-ui'))['NCard'];
     NCheckbox: (typeof import('naive-ui'))['NCheckbox'];
     NColorPicker: (typeof import('naive-ui'))['NColorPicker'];
     NConfigProvider: (typeof import('naive-ui'))['NConfigProvider'];
+    NDataTable: (typeof import('naive-ui'))['NDataTable'];
+    NDatePicker: (typeof import('naive-ui'))['NDatePicker'];
     NDialogProvider: (typeof import('naive-ui'))['NDialogProvider'];
     NDivider: (typeof import('naive-ui'))['NDivider'];
     NDrawer: (typeof import('naive-ui'))['NDrawer'];
@@ -26,6 +29,7 @@ declare module 'vue' {
     NDropdown: (typeof import('naive-ui'))['NDropdown'];
     NForm: (typeof import('naive-ui'))['NForm'];
     NFormItem: (typeof import('naive-ui'))['NFormItem'];
+    NFormItemGi: (typeof import('naive-ui'))['NFormItemGi'];
     NGradientText: (typeof import('naive-ui'))['NGradientText'];
     NGrid: (typeof import('naive-ui'))['NGrid'];
     NGridItem: (typeof import('naive-ui'))['NGridItem'];
@@ -48,6 +52,7 @@ declare module 'vue' {
     NTabPane: (typeof import('naive-ui'))['NTabPane'];
     NTabs: (typeof import('naive-ui'))['NTabs'];
     NTooltip: (typeof import('naive-ui'))['NTooltip'];
+    NUpload: (typeof import('naive-ui'))['NUpload'];
     PageWrapper: (typeof import('./../src/components/common/PageWrapper.vue'))['default'];
     RouterLink: (typeof import('vue-router'))['RouterLink'];
     RouterView: (typeof import('vue-router'))['RouterView'];

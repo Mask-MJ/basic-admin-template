@@ -1,4 +1,4 @@
-import type { RouteLocationNormalizedLoaded, Router } from 'vue-router';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
 import { defineStore } from 'pinia';
 import {
   clearTabRoutes,
@@ -27,10 +27,10 @@ export const useMultipleTabStore = defineStore('tab-store', {
   state: (): TabState => ({
     tabs: [],
     homeTab: {
-      name: 'root',
-      fullPath: '/',
+      name: '/system/factory',
+      fullPath: '/system/factory',
       meta: {
-        title: 'Root',
+        title: 'factory',
         icon: '',
         show: false,
         order: 1,
@@ -80,13 +80,25 @@ export const useMultipleTabStore = defineStore('tab-store', {
      * @param routeHomeName - 路由首页的name
      * @param router - 路由实例
      */
-    initHomeTab(routeHomeName: string, router: Router) {
-      const routes = router.getRoutes();
-      const findHome = routes.find((item) => item.name === routeHomeName);
-      if (findHome && !findHome.children.length) {
-        // 有子路由的不能作为Tab
-        this.homeTab = getTabRouteByVueRoute(findHome);
-      }
+    initHomeTab() {
+      const router = useRouter();
+      const route = router.getRoutes().filter((route) => route.path === '/system/factory')[0];
+      this.homeTab = {
+        name: route.name,
+        fullPath: route.path,
+        meta: route.meta,
+        scrollPosition: {
+          left: 0,
+          top: 0,
+        },
+      };
+      // const routes = router.getRoutes();
+      // console.log('routes', routes);
+      // const findHome = routes.find((item) => item.name === routeHomeName);
+      // if (findHome && !findHome.children.length) {
+      //   // 有子路由的不能作为Tab
+      //   this.homeTab = getTabRouteByVueRoute(findHome);
+      // }
     },
     /**
      * 添加多页签
@@ -216,13 +228,14 @@ export const useMultipleTabStore = defineStore('tab-store', {
     iniTabStore(currentRoute: RouteLocationNormalizedLoaded) {
       const theme = useThemeStore();
 
+      this.initHomeTab();
+
       const tabs: GlobalTabRoute[] = theme.tab.isCache ? getTabRoutes() : [];
-
       const hasHome = getIndexInTabRoutesByRouteName(tabs, this.homeTab.name as string) > -1;
-      if (!hasHome && this.homeTab.name !== 'root') tabs.unshift(this.homeTab);
-
+      if (!hasHome && this.homeTab.name !== '/system/project') tabs.unshift(this.homeTab);
       const isHome = currentRoute.fullPath === this.homeTab.fullPath;
       const index = getIndexInTabRoutesByRouteName(tabs, currentRoute.name as string);
+
       if (!isHome) {
         const currentTab = getTabRouteByVueRoute(currentRoute);
         if (!currentRoute.meta.multiTab) {

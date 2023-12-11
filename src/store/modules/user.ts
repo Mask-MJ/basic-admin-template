@@ -18,7 +18,13 @@ export const USER_INFO_KEY = 'USER__INFO__';
 export const useUserStore = defineStore('user-store', {
   state: (): UserState => ({
     // user info
-    userInfo: useStorage(USER_INFO_KEY, {} as UserInfo),
+    userInfo: useStorage(USER_INFO_KEY, {
+      nickname: '管理员',
+      permissions: [],
+      role: 'manager',
+      id: 1,
+      username: '管理员',
+    } as UserInfo),
     // token
     token: useStorage(TOKEN_KEY, ''),
     // role

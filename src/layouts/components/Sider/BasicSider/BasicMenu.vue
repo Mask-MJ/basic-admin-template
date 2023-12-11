@@ -1,16 +1,31 @@
 <script setup lang="ts">
+  import { RouterTyped } from 'vue-router/auto';
   import { MenuOption } from 'naive-ui';
+  import { RouterLink } from 'vue-router/auto';
+
+  const { t } = useI18n();
   const route = useRoute();
   const app = useAppStore();
   const theme = useThemeStore();
-  const router = useRouter();
+  const router = useRouter() as RouterTyped;
 
   const expandedKeys = ref<string[]>([]);
-
-  // const menus = computed(() => routerStore.menuList);
-  const menus = computed(() => {
-    return router.getRoutes().filter((route) => route.name) as unknown as MenuOption[];
+  const menus = computed<MenuOption[]>(() => {
+    return router
+      .getRoutes()
+      .filter((route) => route.meta.name)
+      .map((route) => {
+        const { icon, name } = route.meta;
+        return {
+          label: () =>
+            h(RouterLink, { to: { path: route.path } }, { default: () => t(name || '') }),
+          icon: () => h('i', { class: icon }),
+          key: route.path,
+          path: route.path,
+        };
+      });
   });
+
   const activeKey = computed(() => route.path);
   function handleUpdateExpandedKeys(keys: string[]) {
     expandedKeys.value = keys;

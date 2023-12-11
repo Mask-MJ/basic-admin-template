@@ -8,6 +8,7 @@
     (e: 'scroll', clientX: number): void;
   }
 
+  const { t } = useI18n();
   const emit = defineEmits<Emits>();
 
   const theme = useThemeStore();
@@ -109,11 +110,8 @@
       @close="tab.removeTab(item.fullPath)"
       @contextmenu="handleContextMenu($event, item.fullPath, item.meta.affix)"
     >
-      <i
-        :class="`icon-${item.meta.icon}`"
-        class="inline-block align-text-bottom mr-4px text-16px"
-      />
-      {{ item.meta.title }}
+      <i :class="item.meta.icon" class="inline-block align-text-bottom mr-4px text-16px" />
+      {{ t(item.meta.name || '') }}
     </component>
   </div>
   <ContextMenu

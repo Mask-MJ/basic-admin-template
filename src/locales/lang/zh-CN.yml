@@ -71,3 +71,8 @@ components:
     btn_zoom_in: 放大
     btn_zoom_out: 缩小
     preview: 预览
+router:
+  dict: 字典管理
+  factory: 工厂管理
+  project: 项目管理
+  valve: 阀门管理

@@ -68,3 +68,8 @@ components:
     btn_zoom_in: Zoom in
     btn_zoom_out: Zoom out
     preview: Preivew
+router:
+  dict: dict
+  factory: factory
+  project: project
+  valve: valve

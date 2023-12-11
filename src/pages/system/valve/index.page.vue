@@ -5,7 +5,7 @@
   definePage({
     meta: {
       icon: 'i-carbon:ibm-cloud-projects',
-      name: 'router.project',
+      name: 'router.valve',
     },
   });
   const router = useRoute();
