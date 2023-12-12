@@ -26,6 +26,16 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
+        // '/view': {
+        //   target: 'http://127.0.0.1:7080/',
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/view/, ''),
+        // },
+        // '/api': {
+        //   target: 'http://127.0.0.1:7080/',
+        //   changeOrigin: true,
+        //   rewrite: (path) => path.replace(/^\/api222/, ''),
+        // },
       },
     },
     esbuild: {

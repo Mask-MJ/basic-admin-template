@@ -5,7 +5,7 @@
 
   definePage({
     meta: {
-      icon: 'i-carbon:ibm-cloud-projects',
+      icon: 'i-carbon:app-connectivity',
       name: 'router.factory',
     },
   });

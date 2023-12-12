@@ -1,12 +1,10 @@
 import type { DataTableColumns } from 'naive-ui';
 import { h } from 'vue';
-import { NButton, NSpace, NSwitch, NPopconfirm } from 'naive-ui';
+import { NButton, NSpace, NPopconfirm } from 'naive-ui';
 
-export interface Factory {
+export interface Dict {
   no: number;
   name: string;
-  status: number;
-  address: string;
   creatAt: string;
   creator: string;
   updateAt: string;
@@ -16,35 +14,12 @@ export interface Factory {
 export const createColumns = ({
   action,
 }: {
-  action: (row: Factory, type: number) => void;
-}): DataTableColumns<Factory> => {
+  action: (row: Dict, type: number) => void;
+}): DataTableColumns<Dict> => {
   return [
     { type: 'selection' },
     { title: '序号', key: 'no', width: 80, align: 'center' },
-    { title: '工厂名称', key: 'name', align: 'center' },
-    { title: '地址', key: 'address', align: 'center' },
-    {
-      title: '状态',
-      key: 'status',
-      align: 'center',
-      render(row) {
-        return h(
-          NSwitch,
-          {
-            value: row.status,
-            checkedValue: 1,
-            uncheckedValue: 0,
-            onUpdateValue: (value: number) => {
-              row.status = value;
-            },
-          },
-          {
-            checked: () => '合作',
-            unchecked: () => '结束',
-          },
-        );
-      },
-    },
+    { title: '模版名称', key: 'name', align: 'center' },
     { title: '创建时间', key: 'creatAt', align: 'center' },
     { title: '创建者', key: 'creator', align: 'center' },
     { title: '更新时间', key: 'updateAt', align: 'center' },
@@ -52,16 +27,14 @@ export const createColumns = ({
     {
       title: 'Action',
       key: 'actions',
+      width: 200,
       align: 'center',
-      width: 300,
       render(row) {
         return h(NSpace, { justify: 'center' }, () => [
           h(NButton, { type: 'primary', onClick: () => action(row, 1) }, () => '编辑'),
-          h(NButton, { type: 'info', onClick: () => action(row, 2) }, () => '项目'),
-          h(NButton, { type: 'warning', onClick: () => action(row, 3) }, () => '阀门'),
           h(
             NPopconfirm,
-            { onPositiveClick: () => action(row, 4) },
+            { onPositiveClick: () => action(row, 2) },
             {
               trigger: () => h(NButton, { type: 'error' }, () => '删除'),
               default: () => '确认删除？',
@@ -73,12 +46,10 @@ export const createColumns = ({
   ];
 };
 
-export const data: Factory[] = [
+export const data: Dict[] = [
   {
     no: 1,
-    name: '工厂1',
-    status: 0,
-    address: '广东省深圳市南山区',
+    name: 'FF Online',
     creatAt: '2022-01-01',
     creator: '张三',
     updateAt: '2022-01-01',
@@ -86,9 +57,31 @@ export const data: Factory[] = [
   },
   {
     no: 2,
-    name: '工厂2',
-    status: 1,
-    address: '北京市海淀区',
+    name: 'FF Offline',
+    creatAt: '2022-01-01',
+    creator: '张三',
+    updateAt: '2022-01-01',
+    updater: '张三',
+  },
+  {
+    no: 3,
+    name: 'FF Online1',
+    creatAt: '2022-01-02',
+    creator: 'User 2',
+    updateAt: '2022-01-02',
+    updater: 'User 2',
+  },
+  {
+    no: 4,
+    name: 'FF Online2',
+    creatAt: '2022-01-02',
+    creator: 'User 2',
+    updateAt: '2022-01-02',
+    updater: 'User 2',
+  },
+  {
+    no: 5,
+    name: 'FF Online3',
     creatAt: '2022-01-02',
     creator: 'User 2',
     updateAt: '2022-01-02',

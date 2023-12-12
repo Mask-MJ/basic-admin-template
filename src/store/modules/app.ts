@@ -1,3 +1,4 @@
+import { RemovableRef } from '@vueuse/core';
 import { defineStore } from 'pinia';
 
 export interface AppState {
@@ -9,14 +10,17 @@ export interface AppState {
   siderCollapse: boolean;
   /** vertical-mix模式下 侧边栏的固定状态 */
   mixSiderFixed: boolean;
+  /** 语言 */
+  lang: RemovableRef<string>;
 }
-
+export const LANG_KEY = 'LANG__KEY';
 export const useAppStore = defineStore('app-store', {
   state: (): AppState => ({
     reloadFlag: true,
     settingDrawerVisible: false,
     siderCollapse: false,
     mixSiderFixed: false,
+    lang: useStorage(LANG_KEY, 'zh-CN'),
   }),
   actions: {
     /**
@@ -64,6 +68,11 @@ export const useAppStore = defineStore('app-store', {
     /** 设置 vertical-mix模式下 侧边栏的固定状态 */
     toggleMixSiderFixed() {
       this.mixSiderFixed = !this.mixSiderFixed;
+    },
+
+    /** 设置语言 */
+    setLang(lang: string) {
+      this.lang = lang;
     },
   },
 });

@@ -73,3 +73,5 @@ router:
   factory: factory
   project: project
   valve: valve
+  charts: charts
+  chat: chat

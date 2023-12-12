@@ -1,6 +1,6 @@
 import type { DataTableColumns } from 'naive-ui';
 import { h } from 'vue';
-import { NButton, NSpace, NPopconfirm } from 'naive-ui';
+import { NButton, NSpace, NPopconfirm, NTag } from 'naive-ui';
 
 export interface Project {
   no: number;
@@ -35,11 +35,11 @@ export const createColumns = ({
       align: 'center',
       render(row) {
         return h(NSpace, { justify: 'center' }, () => [
-          h(NButton, { type: 'primary', onClick: () => action(row, 1) }, () => '编辑'),
-          h(NButton, { type: 'info', onClick: () => action(row, 1) }, () => '数据可视化'),
+          h(NButton, { type: 'primary', onClick: () => action(row, 1) }, () => '查看'),
+          h(NButton, { type: 'info', onClick: () => action(row, 2) }, () => '数据可视化'),
           h(
             NPopconfirm,
-            { onPositiveClick: () => action(row, 2) },
+            { onPositiveClick: () => action(row, 3) },
             {
               trigger: () => h(NButton, { type: 'error' }, () => '删除'),
               default: () => '确认删除？',
@@ -101,5 +101,257 @@ export const data: Project[] = [
     supply_pressure: '65.68 psi',
     drive_signal: '96.00 %',
     pd_inside_status: 'Running',
+  },
+];
+
+export const columns2 = [
+  {
+    title: 'Group',
+    key: 'group',
+    rowSpan: (_rowData, rowIndex) => {
+      if (rowIndex < 4) {
+        return 4;
+      } else {
+        return 7;
+      }
+    },
+  },
+  { title: 'Name', key: 'name' },
+  { title: 'Alert', key: 'alert' },
+  {
+    title: 'Enabled',
+    key: 'enabled',
+    render(row) {
+      const type = row.enabled === 'Check' ? 'info' : row.enabled === 'Yes' ? 'success' : 'error';
+      return h(NTag, { type, bordered: false }, { default: () => row.enabled });
+    },
+  },
+  { title: 'Suppress', key: 'suppress' },
+  { title: 'Actual', key: 'actual' },
+  { title: 'Alert Point', key: 'alert_point' },
+];
+
+export const data2 = [
+  {
+    key: 0,
+    name: 'Field Diagnostic Alert',
+    group: 'Check Alert',
+    alert: '',
+    enabled: 'Check',
+    suppress: 'NO',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 1,
+    name: 'Check Bit Alert',
+    group: 'Check Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 2,
+    name: 'Output Block Timeout',
+    group: 'Check Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '600.00 sec',
+  },
+  {
+    key: 3,
+    name: 'Blocks Set to Defaults',
+    group: 'Check Alert',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 4,
+    name: 'Drive Current',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 5,
+    name: 'Program Memory',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 6,
+    name: 'Static Memory',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 7,
+    name: 'Processor or I/O',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 8,
+    name: 'Travel Sensor',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '0.52 %',
+    alert_point: '',
+  },
+  {
+    key: 9,
+    name: 'Output Pressure Sensor',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '61.72 psi',
+    alert_point: '',
+  },
+  {
+    key: 10,
+    name: 'Output Block Timeout',
+    group: 'Shutdown Alert',
+    alert: '',
+    enabled: 'No',
+    suppress: '',
+    actual: '600.00 sec',
+    alert_point: '',
+  },
+];
+
+export const columns3 = [
+  {
+    title: 'Group',
+    key: 'group',
+    rowSpan: (_rowData, rowIndex) => {
+      if (rowIndex < 2) {
+        return 2;
+      } else if (rowIndex < 4) {
+        return 2;
+      } else {
+        return 4;
+      }
+    },
+  },
+  { title: 'Name', key: 'name' },
+  { title: 'Alert', key: 'alert' },
+  {
+    title: 'Enabled',
+    key: 'enabled',
+    render(row) {
+      const type = row.enabled === 'Check' ? 'info' : row.enabled === 'Yes' ? 'success' : 'error';
+      return h(NTag, { type, bordered: false }, { default: () => row.enabled });
+    },
+  },
+  { title: 'Suppress', key: 'suppress' },
+  { title: 'Actual', key: 'actual' },
+  { title: 'Alert Point', key: 'alert_point' },
+];
+
+export const data3 = [
+  {
+    key: 0,
+    name: 'Field Diagnostic Alert',
+    group: 'Drive Current',
+    alert: '',
+    enabled: 'Failure',
+    suppress: 'NO',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 1,
+    name: 'Drive Current',
+    group: 'Drive Current',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '99.79 %',
+    alert_point: '50.00 %',
+  },
+  {
+    key: 2,
+    name: 'Field Diagnostic Alert',
+    group: 'Drive Signal',
+    alert: '',
+    enabled: 'OffSpec',
+    suppress: 'No',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 3,
+    name: 'Drive Signal',
+    group: 'Drive Signal',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '100.00 %',
+    alert_point: '',
+  },
+  {
+    key: 4,
+    name: 'Field Diagnostic Alert',
+    group: 'Processor Impaired',
+    alert: '',
+    enabled: 'Failure',
+    suppress: 'No',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 5,
+    name: 'Program Memory',
+    group: 'Processor Impaired',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 6,
+    name: 'Static Memory',
+    group: 'Processor Impaired',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '',
+    alert_point: '',
+  },
+  {
+    key: 7,
+    name: 'I/O Processor',
+    group: 'Processor Impaired',
+    alert: '',
+    enabled: 'Yes',
+    suppress: '',
+    actual: '',
+    alert_point: '',
   },
 ];

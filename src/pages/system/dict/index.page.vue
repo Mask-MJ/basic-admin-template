@@ -1,45 +1,32 @@
 <script setup lang="ts">
-  import { createColumns, data, type Project } from './data';
+  import { createColumns, data, type Dict } from './data';
   import EditModal from './modal.vue';
 
   definePage({
     meta: {
-      icon: 'i-carbon:carbon:navaid-vhfor',
-      name: 'router.valve',
+      icon: 'i-carbon:align-box-top-left',
+      name: 'router.dict',
     },
   });
-  const router = useRoute();
-  const title = computed(() => (router.query.name as string) || '');
   const model = reactive<{
-    status_monitor: string;
-    travel_dechar: string;
-    travel: string;
-    supply_pressure: string;
+    name: string;
     range: [number, number];
   }>({
-    status_monitor: '',
-    travel_dechar: '',
-    travel: '',
-    supply_pressure: '',
+    name: '',
     range: [1183135260000, Date.now()],
   });
-  const tableData = ref<Project[]>(data);
+  const tableData = ref<Dict[]>(data);
   const edit = ref(false);
   const activeId = ref();
 
   const columns = computed(() => createColumns({ action }));
 
-  const rowKey = (row: Project) => row.no;
-  const action = (row: Project, type: number) => {
+  const rowKey = (row: Dict) => row.no;
+  const action = (row: Dict, type: number) => {
     if (type === 1) {
       edit.value = true;
       activeId.value = row.no;
     } else if (type === 2) {
-      // 打开新窗口并跳转 http://127.0.0.1:7080/#/chart/preview/686921460203261952
-      // window.open('/view/#/chart/preview/686921460203261952');
-
-      window.open('http://127.0.0.1:7080/#/project/items');
-    } else if (type === 3) {
       // 删除该行数据
       const index = tableData.value.findIndex((item) => item.no === row.no);
       tableData.value.splice(index, 1);
@@ -52,17 +39,8 @@
     <n-card class="rounded-2 mb-4">
       <n-form :model="model" label-placement="left">
         <n-grid :x-gap="12">
-          <n-form-item-gi :span="8" label="Status Monitor">
-            <n-input v-model:value="model.status_monitor" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Travel Dechar">
-            <n-input v-model:value="model.travel_dechar" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Travel">
-            <n-input v-model:value="model.travel" />
-          </n-form-item-gi>
-          <n-form-item-gi :span="8" label="Supply Pressure">
-            <n-input v-model:value="model.supply_pressure" />
+          <n-form-item-gi :span="8" label="模版名称">
+            <n-input v-model:value="model.name" placeholder="请输入模版名称" />
           </n-form-item-gi>
           <n-form-item-gi :span="16" label="创建时间">
             <n-date-picker v-model:value="model.range" class="w-full" type="daterange" clearable />
@@ -74,9 +52,9 @@
         <n-button>重置</n-button>
       </n-space>
     </n-card>
-    <n-card :title="title" class="rounded-2">
+    <n-card title="字典管理" class="rounded-2">
       <template #header-extra>
-        <n-button class="mr-4" type="primary">新建项目</n-button>
+        <n-button class="mr-4" type="primary">新建模版</n-button>
         <n-button type="error">批量删除</n-button>
       </template>
       <n-data-table

@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: (typeof import('vue'))['EffectScope'];
+  const LANG_KEY: (typeof import('../src/store/modules/app'))['LANG_KEY'];
   const MULTIPLE_TABS_KEY: (typeof import('../src/store/modules/multipleTab'))['MULTIPLE_TABS_KEY'];
   const THEME_SETTINGS: (typeof import('../src/store/modules/theme'))['THEME_SETTINGS'];
   const TOKEN_KEY: (typeof import('../src/store/modules/user'))['TOKEN_KEY'];
@@ -322,6 +323,7 @@ import { UnwrapRef } from 'vue';
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<(typeof import('vue'))['EffectScope']>;
+    readonly LANG_KEY: UnwrapRef<(typeof import('../src/store/modules/app'))['LANG_KEY']>;
     readonly MULTIPLE_TABS_KEY: UnwrapRef<
       (typeof import('../src/store/modules/multipleTab'))['MULTIPLE_TABS_KEY']
     >;
@@ -668,6 +670,7 @@ declare module 'vue' {
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<(typeof import('vue'))['EffectScope']>;
+    readonly LANG_KEY: UnwrapRef<(typeof import('../src/store/modules/app'))['LANG_KEY']>;
     readonly MULTIPLE_TABS_KEY: UnwrapRef<
       (typeof import('../src/store/modules/multipleTab'))['MULTIPLE_TABS_KEY']
     >;

@@ -76,3 +76,5 @@ router:
   factory: 工厂管理
   project: 项目管理
   valve: 阀门管理
+  charts: 数据可视化
+  chat: 分析

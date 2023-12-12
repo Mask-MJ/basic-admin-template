@@ -1,20 +1,11 @@
 <script setup lang="ts">
-  import type { UploadFileInfo } from 'naive-ui';
-
+  import { columns2, data2, columns3, data3 } from './data';
   defineProps({
     showModal: { type: Boolean, default: false },
     activeId: { type: Number },
   });
   const emit = defineEmits(['update:showModal']);
 
-  const model = reactive<{ name: string; fileList: UploadFileInfo[] }>({
-    name: '',
-    fileList: [],
-  });
-
-  const handleUploadChange = (data: { fileList: UploadFileInfo[] }) => {
-    model.fileList = data.fileList;
-  };
   const close = () => {
     emit('update:showModal', false);
   };
@@ -25,24 +16,76 @@
 
 <template>
   <n-modal
+    class="!w-4/5"
     :show="showModal"
     preset="dialog"
-    title="编辑项目"
+    title="阀门数据详情"
     positive-text="确认"
     negative-text="取消"
     @positive-click="submitCallback"
     @update:show="close"
   >
-    <n-form ref="formRef" :model="model" label-placement="left">
-      <n-form-item label="项目名称">
-        <n-input v-model:value="model.name" placeholder="请输入项目名称" />
-      </n-form-item>
-      <n-form-item label="文件列表">
-        <n-upload v-model:file-list="model.fileList" accept=".pdf" @change="handleUploadChange">
-          <n-button>上传文件</n-button>
-        </n-upload>
-      </n-form-item>
-    </n-form>
+    <n-scrollbar style="max-height: 700px">
+      <n-card title="Monitor" style="margin-bottom: 16px">
+        <n-descriptions label-placement="left" bordered class="mb-4">
+          <n-descriptions-item label="Setpoint"> 0.00 % </n-descriptions-item>
+          <n-descriptions-item label="Travel Dechar"> 0.52 % </n-descriptions-item>
+          <n-descriptions-item label="Travel Target"> -25.00 % </n-descriptions-item>
+          <n-descriptions-item label="Travel"> 0.52 % </n-descriptions-item>
+          <n-descriptions-item label="Setpoint_D"> OPEN </n-descriptions-item>
+          <n-descriptions-item label="Travel_D"> CLOSED </n-descriptions-item>
+          <n-descriptions-item label="Travel Deviation"> 0.52 % </n-descriptions-item>
+          <n-descriptions-item label="Pressure A"> 61.72 psi </n-descriptions-item>
+          <n-descriptions-item label="Pressure B"> 0.18 psi </n-descriptions-item>
+        </n-descriptions>
+      </n-card>
+      <n-card title="Instrument" style="margin-bottom: 16px">
+        <n-descriptions label-placement="left" title="TRANSDUCER" bordered class="mb-4">
+          <n-descriptions-item label="Instrument Family"> DVC6200f </n-descriptions-item>
+          <n-descriptions-item label="Tag Description"> 1341-FV-81303 </n-descriptions-item>
+          <n-descriptions-item label="Calibration Person"> </n-descriptions-item>
+          <n-descriptions-item label="Calibration Loc."> 0.52 % </n-descriptions-item>
+          <n-descriptions-item label="Calibration Date"> 2023-7-21 19:56:00 </n-descriptions-item>
+          <n-descriptions-item label="Last Travel Calib Type"> Auto </n-descriptions-item>
+        </n-descriptions>
+        <n-descriptions label-placement="left" title="RESOURCE" bordered class="mb-4">
+          <n-descriptions-item label="Tag Description"> </n-descriptions-item>
+          <n-descriptions-item label="Field Serial Number"> F003005609 </n-descriptions-item>
+          <n-descriptions-item label="Manufacturer"> Fisher Controls </n-descriptions-item>
+          <n-descriptions-item label="Device Type"> 4602 </n-descriptions-item>
+          <n-descriptions-item label="Device Revision"> 4 </n-descriptions-item>
+          <n-descriptions-item label="Minimum DD Revision"> 1 </n-descriptions-item>
+          <n-descriptions-item label="ITK Version"> 6 </n-descriptions-item>
+          <n-descriptions-item label="Firmware Revision"> 3-01-013 </n-descriptions-item>
+          <n-descriptions-item label="Standby Revision"> 2-00-023 </n-descriptions-item>
+          <n-descriptions-item label="Hardware Revision"> 9 </n-descriptions-item>
+          <n-descriptions-item label="Features">
+            REPORTS / FAULT ST / SOFT LOCK / PWA-STATUS
+          </n-descriptions-item>
+          <n-descriptions-item label="Diagnostic Level"> PD </n-descriptions-item>
+          <n-descriptions-item label="Function Blocks">
+            AO/DO/AI/DI/PID/IS/OS/MAI/CS
+          </n-descriptions-item>
+          <n-descriptions-item label="Travel Control Capable"> Yes </n-descriptions-item>
+          <n-descriptions-item label="Travel w/Fallback Capable"> Yes </n-descriptions-item>
+          <n-descriptions-item label="Pressure Control Capable"> Yes </n-descriptions-item>
+        </n-descriptions>
+      </n-card>
+      <n-tabs type="segment">
+        <n-tab-pane name="Config" tab="Config">
+          <n-data-table :columns="columns2" :data="data2" :single-line="false" />
+        </n-tab-pane>
+        <n-tab-pane name="Electronic" tab="Electronic">
+          <n-data-table :columns="columns3" :data="data3" :single-line="false" />
+        </n-tab-pane>
+        <n-tab-pane name="Proximity" tab="Proximity">
+          <n-data-table :columns="columns2" :data="data2" :single-line="false" />
+        </n-tab-pane>
+        <n-tab-pane name="Sensor" tab="Sensor">
+          <n-data-table :columns="columns2" :data="data2" :single-line="false" />
+        </n-tab-pane>
+      </n-tabs>
+    </n-scrollbar>
   </n-modal>
 </template>
 
