@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@antv/g2": "^5.1.12",
     "@vueuse/core": "^10.7.0",
     "axios": "^1.6.2",
     "colord": "^2.9.3",
@@ -24,6 +25,7 @@
     "qs": "^6.11.2",
     "vue": "^3.3.8",
     "vue-i18n": "^9.8.0",
+    "vue-pdf-embed": "1",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

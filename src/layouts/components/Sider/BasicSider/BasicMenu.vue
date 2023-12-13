@@ -13,7 +13,7 @@
   const menus = computed<MenuOption[]>(() => {
     return router
       .getRoutes()
-      .filter((route) => route.meta.name)
+      .filter((route) => route.meta.name && !route.meta.hidden)
       .map((route) => {
         const { icon, name } = route.meta;
         return {

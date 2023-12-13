@@ -1,11 +1,14 @@
 <script setup lang="ts">
-  import { createColumns, data, type Project } from './data';
+  import { createColumns, data, Pdf, type Project } from './data';
   import EditModal from './modal.vue';
+  import AsyncModal from './asyncModal.vue';
+  import AnalysisModal from './analysisModal.vue';
 
   definePage({
     meta: {
       icon: 'i-carbon:ibm-cloud-projects',
       name: 'router.project',
+      hidden: true,
     },
   });
   const router = useRoute();
@@ -19,16 +22,21 @@
   });
   const tableData = ref<Project[]>(data);
   const edit = ref(false);
+  const showAsyncModal = ref(false);
+  const showAnalysisModal = ref(false);
   const activeId = ref();
 
   const columns = computed(() => createColumns({ action }));
 
   const rowKey = (row: Project) => row.no;
-  const action = (row: Project, type: number) => {
+  const action = (row: Project | Pdf, type: number) => {
     if (type === 1) {
       edit.value = true;
       activeId.value = row.no;
     } else if (type === 2) {
+      // 分析
+      showAnalysisModal.value = true;
+    } else if (type === 3) {
       // 删除该行数据
       const index = tableData.value.findIndex((item) => item.no === row.no);
       tableData.value.splice(index, 1);
@@ -68,6 +76,8 @@
       />
     </n-card>
     <EditModal v-model:showModal="edit" :active-id="activeId" />
+    <AsyncModal v-model:showModal="showAsyncModal" :active-id="activeId" />
+    <AnalysisModal v-model:showModal="showAnalysisModal" />
   </div>
 </template>
 

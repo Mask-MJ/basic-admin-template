@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user-store', {
       username: '管理员',
     } as UserInfo),
     // token
-    token: useStorage(TOKEN_KEY, ''),
+    token: useStorage(TOKEN_KEY, '1111'),
     // role
     role: '',
     permissions: [],

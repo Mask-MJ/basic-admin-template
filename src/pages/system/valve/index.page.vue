@@ -1,15 +1,14 @@
 <script setup lang="ts">
+  import { router } from '@/router';
   import { createColumns, data, type Project } from './data';
-  import EditModal from './modal.vue';
+  import HistoryModal from './historyModal.vue';
+  import ChartModal from './chartModal.vue';
 
   definePage({
-    meta: {
-      icon: 'i-carbon:carbon:navaid-vhfor',
-      name: 'router.valve',
-    },
+    meta: { icon: 'i-carbon:carbon:navaid-vhfor', name: 'router.valve', hidden: true },
   });
-  const router = useRoute();
-  const title = computed(() => (router.query.name as string) || '');
+  const route = useRoute();
+  const title = computed(() => (route.query.name as string) || '');
   const model = reactive<{
     status_monitor: string;
     travel_dechar: string;
@@ -24,22 +23,23 @@
     range: [1183135260000, Date.now()],
   });
   const tableData = ref<Project[]>(data);
-  const edit = ref(false);
+  const showHistoryModal = ref(false);
+  const showChartModal = ref(false);
   const activeId = ref();
 
   const columns = computed(() => createColumns({ action }));
 
   const rowKey = (row: Project) => row.no;
-  const action = (row: Project, type: number) => {
+  const action = (row, type: number) => {
     if (type === 1) {
-      edit.value = true;
+      showHistoryModal.value = true;
       activeId.value = row.no;
     } else if (type === 2) {
-      // 打开新窗口并跳转 http://127.0.0.1:7080/#/chart/preview/686921460203261952
-      // window.open('/view/#/chart/preview/686921460203261952');
-
-      window.open('http://127.0.0.1:7080/#/project/items');
+      router.push({ path: '/system/history', query: { id: row.no, name: row.identifier } });
     } else if (type === 3) {
+      showChartModal.value = true;
+      activeId.value = row.no;
+    } else if (type === 4) {
       // 删除该行数据
       const index = tableData.value.findIndex((item) => item.no === row.no);
       tableData.value.splice(index, 1);
@@ -76,8 +76,8 @@
     </n-card>
     <n-card :title="title" class="rounded-2">
       <template #header-extra>
-        <n-button class="mr-4" type="primary">新建项目</n-button>
-        <n-button type="error">批量删除</n-button>
+        <n-button class="mr-4" type="primary" disabled>新建阀门</n-button>
+        <n-button type="error" disabled>批量删除</n-button>
       </template>
       <n-data-table
         :columns="columns"
@@ -87,8 +87,7 @@
         :row-key="rowKey"
       />
     </n-card>
-    <EditModal v-model:showModal="edit" :active-id="activeId" />
+    <HistoryModal v-model:showModal="showHistoryModal" :active-id="activeId" />
+    <ChartModal v-model:showModal="showChartModal" :active-id="activeId" />
   </div>
 </template>
-
-<style lang="" scoped></style>

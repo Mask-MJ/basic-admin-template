@@ -9,12 +9,10 @@ declare module 'vue' {
   export interface GlobalComponents {
     DarkModeContainer: (typeof import('./../src/components/common/DarkModeContainer.vue'))['default'];
     DarkModeSwitch: (typeof import('./../src/components/common/DarkModeSwitch.vue'))['default'];
-    HelloWorld: (typeof import('./../src/components/HelloWorld.vue'))['default'];
     HoverContainer: (typeof import('./../src/components/common/HoverContainer.vue'))['default'];
     NaiveProvider: (typeof import('./../src/components/common/NaiveProvider.vue'))['default'];
     NAvatar: (typeof import('naive-ui'))['NAvatar'];
     NBackTop: (typeof import('naive-ui'))['NBackTop'];
-    NButto: (typeof import('naive-ui'))['NButto'];
     NButton: (typeof import('naive-ui'))['NButton'];
     NCard: (typeof import('naive-ui'))['NCard'];
     NCheckbox: (typeof import('naive-ui'))['NCheckbox'];
@@ -33,11 +31,14 @@ declare module 'vue' {
     NForm: (typeof import('naive-ui'))['NForm'];
     NFormItem: (typeof import('naive-ui'))['NFormItem'];
     NFormItemGi: (typeof import('naive-ui'))['NFormItemGi'];
+    NGi: (typeof import('naive-ui'))['NGi'];
     NGradientText: (typeof import('naive-ui'))['NGradientText'];
     NGrid: (typeof import('naive-ui'))['NGrid'];
     NGridItem: (typeof import('naive-ui'))['NGridItem'];
     NImage: (typeof import('naive-ui'))['NImage'];
     NInput: (typeof import('naive-ui'))['NInput'];
+    NInputGroup: (typeof import('naive-ui'))['NInputGroup'];
+    NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel'];
     NInputNumber: (typeof import('naive-ui'))['NInputNumber'];
     NLayout: (typeof import('naive-ui'))['NLayout'];
     NLayoutContent: (typeof import('naive-ui'))['NLayoutContent'];
@@ -48,6 +49,7 @@ declare module 'vue' {
     NMessageProvider: (typeof import('naive-ui'))['NMessageProvider'];
     NModal: (typeof import('naive-ui'))['NModal'];
     NNotificationProvider: (typeof import('naive-ui'))['NNotificationProvider'];
+    NPagination: (typeof import('naive-ui'))['NPagination'];
     NScrollbar: (typeof import('naive-ui'))['NScrollbar'];
     NSelect: (typeof import('naive-ui'))['NSelect'];
     NSpace: (typeof import('naive-ui'))['NSpace'];

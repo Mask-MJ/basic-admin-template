@@ -88,5 +88,3 @@
     </n-scrollbar>
   </n-modal>
 </template>
-
-<style lang="" scoped></style>

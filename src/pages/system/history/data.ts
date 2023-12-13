@@ -35,8 +35,8 @@ export const createColumns = ({
       align: 'center',
       render(row) {
         return h(NSpace, { justify: 'center' }, () => [
-          // h(NButton, { type: 'primary', onClick: () => action(row, 1) }, () => '查看'),
-          h(NButton, { type: 'primary', onClick: () => action(row, 2) }, () => '查看'),
+          h(NButton, { type: 'primary', onClick: () => action(row, 1) }, () => '查看'),
+          h(NButton, { type: 'primary', onClick: () => action(row, 2) }, () => '查看2'),
           h(NButton, { type: 'info', onClick: () => action(row, 3) }, () => '数据可视化'),
           h(
             NPopconfirm,
